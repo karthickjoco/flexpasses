@@ -15,7 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('getProfiles')->everyTenMinutes();
+        $schedule->command('getVechiles')->everyTenMinutes();
+        $schedule->command('getOngoingTrips')->everyMinute();
+        $schedule->command('getCompletedTrips')->everyFiveMinutes();
+        $schedule->command('dailyReport')->daily();
+        $schedule->command('monthlyReport')->daily();
     }
 
     /**
