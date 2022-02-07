@@ -15,8 +15,9 @@
     <p style="margin: 10px; font-size:16px;">&nbsp;A summary of trips taken From {{\Carbon\Carbon::now()->subtract('1 month')->format('d')}}th {{\Carbon\Carbon::now()->subtract('1 month')->format('M Y')}}  to {{\Carbon\Carbon::now()->subtract('1 day')->format('d')}}th  {{\Carbon\Carbon::now()->subtract('1 day')->format('M Y')}} </p>
     <div style=" margin:10px;
         font-size:16px;">
-        <p style="margin: 2px;">Totals Trip Qty: {{count($details)}}</p>
+        <p style="margin: 2px;">Total Trip Qty: {{count($details)}}</p>
         <p style="margin: 2px;">Sub Total: ${{number_format(20*count($details),2)}}</p>
+        <p style="margin: 2px;">Tax at 8.875%: {{ number_format(((20*count($details))*8.875)/100,2) }} </p>
         <p style="margin: 2px;"> Total: ${{ number_format(20*count($details)+(((20*count($details))*8.875)/100),2) }}</p>
     </div>
 

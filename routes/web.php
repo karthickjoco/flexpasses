@@ -33,6 +33,7 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('sendemail', function () {
+    echo Carbon::now()->format('Y-m-d H:i:s');exit;
     $datelastmonth= Carbon::now()->subtract('1 month')->format('Y-m-d');
     $datecurrentmonth= Carbon::now()->subtract('1 day')->format('Y-m-d');
 
