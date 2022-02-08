@@ -60,7 +60,7 @@ class monthlyReport extends Command
 
         //dd(DB::getQueryLog()); // Show results of log
         if(count($result)) {
-            Mail::to('karthick@ridejoco.com')->send(new \App\Mail\monthlyReport($result));
+            Mail::to('karthick@ridejoco.com')->bcc('jonathan@ridejoco.com')->send(new \App\Mail\monthlyReport($result));
         }
 
     }

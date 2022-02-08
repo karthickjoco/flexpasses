@@ -18,9 +18,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('getProfiles')->everyTenMinutes();
         $schedule->command('getVechiles')->everyTenMinutes();
         $schedule->command('getOngoingTrips')->everyMinute();
-        $schedule->command('getCompletedTrips')->everyFiveMinutes();
-        $schedule->command('dailyReport')->daily();
-        $schedule->command('monthlyReport')->daily();
+        $schedule->command('getCompletedTrips')->everyTwoMinutes();
+        $schedule->command('dailyReport')->dailyAt('05:00'); //UTC time respective to EST
+        $schedule->command('monthlyReport')->dailyAt('05:00'); //UTC time respective to EST
     }
 
     /**

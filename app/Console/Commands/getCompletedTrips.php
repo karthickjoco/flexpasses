@@ -46,11 +46,11 @@ class getCompletedTrips extends Command
         $vulogapiclient=new VulogApiClient();
         $selecuser=Profile::where('userName','like','D000%')->get();
         //$datestart=Carbon::now()->setTimezone('UTC')->subtract('5 minute')->format('Y-m-d H:i:s');//2022-02-06T11:06:00Z
-        $datestart=Carbon::now()->setTimezone('UTC')->subtract('6 minute')->toIso8601ZuluString();//2022-02-06T11:06:00Z
-        $dateend=Carbon::now()->setTimezone('UTC')->toIso8601ZuluString();
+        $datestart=Carbon::now()->setTimezone('America/New_york')->subtract('15 minute')->toIso8601ZuluString();//2022-02-06T11:06:00Z
+        $dateend=Carbon::now()->setTimezone('America/New_york')->toIso8601ZuluString();
         //2022-02-01T05%3A00%3A00Z
         foreach ($selecuser as $user) {
-            $url = "boapi/proxy/trip/fleets/BEAMBIKE-USNYC/trips/users/" . $user->userId . "/?startDate=".$datestart."&endDate=".$dateend."&sort=date,desc&size=2000";
+            $url = "boapi/proxy/trip/fleets/BEAMBIKE-USNYC/trips/users/" . $user->userId . "/?sort=date,desc&size=2000";
             $completed = $vulogapiclient->getRequest($url);
             Storage::put('completed.json', json_encode($completed));
             $contents = json_decode(Storage::get('completed.json'));

@@ -56,7 +56,7 @@ class dailyReport extends Command
         $result=$select2->concat($select);
         //dd(DB::getQueryLog()); // Show results of log
         if(count($result)) {
-            Mail::to('karthick@ridejoco.com')->send(new \App\Mail\dailyReport($result));
+            Mail::to('karthick@ridejoco.com')->bcc('jonathan@ridejoco.com')->send(new \App\Mail\dailyReport($result));
         }
 
     }
