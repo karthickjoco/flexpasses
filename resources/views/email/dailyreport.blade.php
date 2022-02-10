@@ -25,7 +25,7 @@
             <tr>
                 <td  style="padding: 3px"> {{ $loop->index+1 }} </td>
                 <td  style="padding: 3px;"> {{ $detail->name }} </td>
-                <td  style="padding: 3px;"> {{ $detail->startdate }} </td>
+                <td  style="padding: 3px;"> {{ \Carbon\Carbon::parse($detail->startdate)->format('Y-m-d H:i') }} </td>
                 <td  style="padding: 3px;"> {{ $detail->userName }} </td>
             </tr>
         @endforeach
