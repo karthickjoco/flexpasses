@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('getOngoingTrips')->everyMinute();
         $schedule->command('getCompletedTrips')->everyTwoMinutes();
         $schedule->command('dailyReport')->dailyAt('05:00'); //UTC time respective to EST
-        $schedule->command('monthlyReport')->dailyAt('05:00'); //UTC time respective to EST
+        $schedule->command('monthlyReport')->monthlyOn(12,'05:05'); //UTC time respective to EST
     }
 
     /**
