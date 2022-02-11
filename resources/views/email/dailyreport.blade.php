@@ -16,7 +16,7 @@
     <div style="overflow-x:auto;">
     <table style="margin: 10px;width: 95%;" border="1"  cellpadding="0" cellspacing="0">
         <thead>
-            <th>S.no</th>
+            <th>#</th>
             <th>Bike ID</th>
             <th>Start Time</th>
             <th>Account ID</th>
@@ -26,7 +26,7 @@
                 <td  style="padding: 3px"> {{ $loop->index+1 }} </td>
                 <td  style="padding: 3px;"> {{ $detail->name }} </td>
                 <td  style="padding: 3px;"> {{ \Carbon\Carbon::parse($detail->startdate)->format('Y-m-d H:i') }} </td>
-                <td  style="padding: 3px;"> {{ $detail->userName }} </td>
+                <td  style="padding: 3px;"> <a target="_blank" style="color:#000;" >{{ $detail->userName }}</a> </td>
             </tr>
         @endforeach
     </table>
