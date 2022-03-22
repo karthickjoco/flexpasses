@@ -44,7 +44,8 @@ class getProfiles extends Command
         $cur1  = $date->modify('-2 days')->format('Y-m-d');
 	    $now = new DateTime();
         $cur = $now->modify('+1 day')->format('Y-m-d');
-        $uri = 'boapi/proxy/user/fleets/BEAMBIKE-USNYC/users?startDate=' . $cur1 . '&endDate=' . $cur . '&size=2000&sort=DESC';
+        $uri = 'boapi/proxy/user/fleets/BEAMBIKE-USNYC/users?startDate=' . $cur1 . '&endDate=' . $cur . '&size=5000&sort=DESC';
+        $uri = 'boapi/proxy/user/fleets/BEAMBIKE-USNYC/users?page=0&size=5000&sort=registrationDate,DESC';
         $vulogApiClient = new VulogAPIClient();
         $usersResult    = $vulogApiClient->getRequest($uri);
 

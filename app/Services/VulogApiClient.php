@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request;
@@ -19,12 +20,11 @@ class VulogApiClient
     protected $username;
     protected $password;
     protected $headers;
-    public 	  $accessToken;
-    private   $securityOptions;
+    public $accessToken;
+    private $securityOptions;
     protected $fleetid='BEAMBIKE-USNYC';
     public function __construct()
     {
-
         $this->client = new Client(['defaults' => [
             'verify' => false
         ]]);
@@ -35,26 +35,22 @@ class VulogApiClient
     public function prepareHeaders()
     {
         //staging
-//        $this->api_url         = 'https://java-sta.vulog.com/';
-//        $this->client_id       = 'BEAMBIKE-USNYC_secure';
-//        $this->client_secret   = 'a0482880-5e33-4145-a54f-37f95df250fb';
-//        $this->securityOptions = 'SSL_OP_NO_SSLv3';
-//        $this->username        = 'karthick';
-//        $this->password        = 'Abc123!';
-//        $this->apikey          = 'ed1afac2-093d-46d8-96e8-363ecde45c34';
+        $this->api_url         = 'https://java-sta.vulog.com/';
+        $this->client_id       = 'BEAMBIKE-USNYC_secure';
+        $this->client_secret   = 'a0482880-5e33-4145-a54f-37f95df250fb';
+        $this->securityOptions = 'SSL_OP_NO_SSLv3';
+        $this->username        = 'karthick';
+        $this->password        = 'Abc123!';
+        $this->apikey          = 'ed1afac2-093d-46d8-96e8-363ecde45c34';
 
-//  production
-        $this->api_url 			= 'https://java-us01.vulog.com/';
-        $this->client_id 		= 'BEAMBIKE-USNYC_secure';
-        $this->client_secret 	= '436a4c9e-ca50-489f-9545-83c5bf7eab84';
-        $this->securityOptions 	= 'SSL_OP_NO_SSLv3';
-        $this->username 		= 'karthick@parliamenttutors.com';
-        $this->password 		= 'Ridejoco2020!';
-        $this->apikey 			= 'ffe12241-2f42-44c7-a892-49aff4153d15';
-
-
-
-
+        //  production
+        // $this->api_url 			= 'https://java-us01.vulog.com/';
+        // $this->client_id 		= 'BEAMBIKE-USNYC_secure';
+        // $this->client_secret 	= '436a4c9e-ca50-489f-9545-83c5bf7eab84';
+        // $this->securityOptions 	= 'SSL_OP_NO_SSLv3';
+        // $this->username 		= 'karthick@parliamenttutors.com';
+        // $this->password 		= 'Ridejoco2020!';
+        // $this->apikey 			= 'ffe12241-2f42-44c7-a892-49aff4153d15';
     }
 
     public function prepareBearerHeaders()
@@ -79,11 +75,10 @@ class VulogApiClient
         ];
 
         $this->csvheaders	=	$csvheadersInfo;
-
     }
 
 
-    public function getRequest(string $uri = null,  array $query = [])
+    public function getRequest(string $uri = null, array $query = [])
     {
         $this->prepareBearerHeaders();
         $full_path = $this->api_url;
@@ -102,8 +97,7 @@ class VulogApiClient
             if ($response && $status === 200 && $response !== 'null') {
                 return json_decode($response);
             }
-        }
-        catch (GuzzleHttp\Exception\BadResponseException $e) {
+        } catch (GuzzleHttp\Exception\BadResponseException $e) {
             #guzzle repose for future use
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
@@ -118,10 +112,10 @@ class VulogApiClient
         $this->prepareBearerHeaders();
         $full_path = $this->api_url;
         $full_path .= $uri;
-//print_r($post_params);exit;
+        //    print_r(json_encode($post_params));exit;
+        //print_r($post_params);exit;
         try {
-
-                $request = $this->client->post($full_path, [
+            $request = $this->client->post($full_path, [
                     'headers' => $this->headers,
                     'body' => json_encode($post_params),
                     //'http_errors'=>false
@@ -136,9 +130,7 @@ class VulogApiClient
             if ($response && $status === 200 && $response !== 'null') {
                 return $response;
             }
-
-        }
-        catch (Guzzle\Http\Exception\BadResponseException $e) {
+        } catch (Guzzle\Http\Exception\BadResponseException $e) {
             #guzzle repose for future use
             $response             = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
@@ -154,7 +146,6 @@ class VulogApiClient
         $full_path .= $uri;
 
         try {
-
             $request = $this->client->delete($full_path, [
                 'headers' => $this->headers,
                 'body'    => json_encode($post_params),
@@ -176,14 +167,13 @@ class VulogApiClient
         return null;
     }
 
-    public function postCsvRequest(string $uri = null,$post_params)
+    public function postCsvRequest(string $uri = null, $post_params)
     {
         $this->prepareBearerHeaders();
         $full_path = $this->api_url;
         $full_path .= $uri;
         //print_r($this->headers);
         try {
-
             $request = $this->client->post($full_path, [
                 'headers'         => $this->headers,
                 'stream' => true,
@@ -202,9 +192,7 @@ class VulogApiClient
             if ($response && $status === 200 && $response !== 'null') {
                 return $response;
             }
-        }
-
-        catch (GuzzleHttp\Exception\BadResponseException $e) {
+        } catch (GuzzleHttp\Exception\BadResponseException $e) {
             #guzzle repose for future use
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
@@ -212,8 +200,8 @@ class VulogApiClient
         }
         return null;
     }
-    public function refreshToken(){
-
+    public function refreshToken()
+    {
         $full_path	 = $this->api_url;
         $full_path .= 'auth/realms/'.$this->fleetid.'/protocol/openid-connect/token';
 
@@ -246,36 +234,28 @@ class VulogApiClient
                 'expires_in' 	=> $final_expires_in,
                 'refresh_token' => $res->refresh_token
             ]);
-
         }
     }
 
-    public function callBack(){
-
-        if(Auth::check()){
+    public function callBack()
+    {
+        if (Auth::check()) {
             $user = Auth::user();
-        }else{
-            $user = User::where('id',1)->first();
+        } else {
+            $user = User::where('id', 1)->first();
             Auth::login($user);
         }
 
         $full_path	 = $this->api_url;
         $full_path .= 'auth/realms/'.$this->fleetid.'/protocol/openid-connect/token';
 
-        if(auth()->user()->token){
-
+        if (auth()->user()->token) {
             if (auth()->user()->token->hasExpired()) {
-
                 $this->refreshToken();
-
-
-            }else{
-
+            } else {
                 $this->accessToken = auth()->user()->token->access_token;
             }
-
-        }else{
-
+        } else {
             $postparm	= [
                 'grant_type'	 	=> 'password',
                 'client_id' 		=> $this->client_id,
@@ -305,14 +285,13 @@ class VulogApiClient
                     'expires_in' => $final_expires_in,
                     'refresh_token' => $res->refresh_token
                 ]);
-
             }
         }
-
     }
 
-    public function kalviyoapi($uri,$data){
-        $user = User::where('id',1)->first();
+    public function kalviyoapi($uri, $data)
+    {
+        $user = User::where('id', 1)->first();
         Auth::login($user);
         $headersInfo = [
             'User-Agent'=> 'testing/2.0',
@@ -320,12 +299,11 @@ class VulogApiClient
             'Content-Type'=> 'application/json',
 
         ];
-        $request=$this->client->post($uri,[
+        $request=$this->client->post($uri, [
             'headers'=>$headersInfo,
             'stream'=>true,
             'body'=>json_encode($data)
         ]);
         $response = $request ? $request->getBody()->getContents() : null;
     }
-
 }

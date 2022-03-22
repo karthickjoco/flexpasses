@@ -19,8 +19,14 @@ class Kernel extends ConsoleKernel
         $schedule->command('getVechiles')->everyTenMinutes();
         $schedule->command('getOngoingTrips')->everyMinute();
         $schedule->command('getCompletedTrips')->everyTwoMinutes();
-        $schedule->command('dailyReport')->dailyAt('05:00'); //UTC time respective to EST
-        $schedule->command('monthlyReport')->monthlyOn(12,'05:05'); //UTC time respective to EST
+        // $schedule->command('dailyReport')->dailyAt('05:00'); //UTC time respective to EST
+        // $schedule->command('monthlyReport')->monthlyOn(20, '05:05'); //UTC time respective to EST
+
+
+        //commented the above cron since those are in live and used for flex passes project and i am starting the testing on the release end trip project
+
+        //$schedule->command('endOngoing')->everyTwoMinutes();
+        $schedule->command('tripTerminate')->everyTenMinutes();
     }
 
     /**
